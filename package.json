@@ -1,0 +1,16 @@
+{
+  "name": "microservice1",
+  "description": "Api",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "ip": "^1.1.4",
+    "mongoose": "^4.7.6",
+    "morgan": "^1.7.0"
+  },
+  "scripts": {
+    "start": "node api.js"
+  }
+}
