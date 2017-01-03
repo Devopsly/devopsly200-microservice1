@@ -75,6 +75,25 @@ app.post('/users', (req, res) => {
   });
 });
 
+app.get('/createoneuser', (req, res) => {
+  const startTime = Date.now();
+  const name = "Joe Johnson";
+
+  const user = new User({ name });
+  user.save((err) => {
+    if (err)  {
+      return res.send('Something went wrong');
+    }
+
+    const timestamp = Date.now() - startTime;
+
+    res.send({
+      time: timestamp,
+      data: user
+    });
+  });
+});
+
 app.put('/users/:id', (req, res) => {
   const startTime = Date.now();
   const name = req.body.name;
