@@ -18,7 +18,7 @@ var mongoDbUrl;
 //  mongoDbUrl = 'localhost:27017';
 //}
 
-var mongoPort = process.env.MONGOPORT;
+var mongoPort = 27017; // process.env.MONGOPORT;
 
 mongoDbUrl = thisAddress + ":" + mongoPort; 
 
