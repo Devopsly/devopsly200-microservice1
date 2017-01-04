@@ -1,9 +1,9 @@
 FROM google/nodejs
 
-WORKDIR /api
-ADD package.json /api/
+WORKDIR /app
+ADD package.json /app/
 RUN npm install
-ADD . /api
+ADD . /app
 
 CMD []
 ENTRYPOINT ["/nodejs/bin/npm", "start"]
