@@ -2,7 +2,7 @@
     "id": "microservice1-production", 
     "container": {
       "docker": {
-        "image": "localhost:5000/devopsly200-microservice1-productionstage:latest",
+        "image": "localhost:5000/devopsly200-microservice1-productionstage",
         "network": "BRIDGE",
         "portMappings": [
           {"containerPort": 3000, "hostPort": 31450, "servicePort": 3000}

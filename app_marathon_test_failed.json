@@ -2,7 +2,7 @@
     "id": "microservice1-test-failed", 
     "container": {
       "docker": {
-        "image": "localhost:5000/devopsly200-microservice1-teststage-failed:latest",
+        "image": "localhost:5000/devopsly200-microservice1-teststage-failed",
         "network": "BRIDGE",
         "portMappings": [
           {"containerPort": 3000, "hostPort": 31401, "servicePort": 3000}
