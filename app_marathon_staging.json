@@ -1,0 +1,15 @@
+{
+    "id": "microservice1-staging", 
+    "container": {
+      "docker": {
+        "image": "localhost:5000/devopsly200-microservice1-stagingstage:latest",
+        "network": "BRIDGE",
+        "portMappings": [
+          {"containerPort": 3000, "hostPort": 31425, "servicePort": 3000}
+        ]
+      }
+    },
+    "cpus": 0.2,
+    "mem": 100.0,
+    "instances": 1
+}
