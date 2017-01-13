@@ -5,5 +5,8 @@ ADD package.json /api/
 RUN npm install
 ADD . /api
 
+ENV DATABASE_PORT=31500
+ENV STARTER_SERVICE_PORT=31300
+
 CMD []
 ENTRYPOINT ["/nodejs/bin/npm", "start"]

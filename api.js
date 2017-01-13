@@ -5,6 +5,7 @@ var morgan = require('morgan');
 
 var ip = require("ip");
 var thisAddress = ip.address();
+var localAddress = ip.address();
 console.log("IP address is ");
 console.log(thisAddress);
 
@@ -13,7 +14,16 @@ var http = require('http');
 
 var User;
 var mongoDbUrl;
-var mongoPort=27017;
+var mongoPort = process.env.DATABASE_PORT;
+// var mongoPort=27017;
+
+var starterServicePort = process.env.STARTER_SERVICE_PORT;
+// var starterServicePort = 8000;
+
+
+var finalGreeting = "Whatever";
+
+
 
 var options = {
   host: 'myip.dnsomatic.com',
@@ -30,20 +40,73 @@ callback = function(response) {
 
   //the whole response has been recieved, so we just print it out here
   response.on('end', function () {
-    console.log(str);
+    console.log("Internet address is " + str);
     thisAddress = str;
     mongoDbUrl = thisAddress + ":" + mongoPort;
     mongoose.connect(`mongodb://${mongoDbUrl}/userdb`);
     User = mongoose.model('User', { name: String });
 
+    ///////////////////
+
+var options1= {
+        host: thisAddress, //'localhost' 
+        path: '/',
+        port: starterServicePort
+    };
+callback1 = function(response1) {
+
+       var greeting = '';
+
+        //another chunk of data has been recieved, so append it to `str`
+        response1.on('data', function (chunk1) {
+                greeting += chunk1;
+        });
+
+        //the whole response has been recieved, so we just print it out here
+        response1.on('end', function () {
+                finalGreeting = greeting;
+                console.log(finalGreeting);
+        });
+
+    };
+
+http.request(options1, callback1).end();
+
+
+    ///////////////////
+
+
   });
-}
+
+};
+
+
+
 
 http.request(options, callback).end();
 
 var app = express();
 
 app.use(bodyParser.json());
+
+app.get('/greetuser', (req, res) => {
+  const startTime = Date.now();
+
+
+  User.find((err, users) => {
+    if (err)  {
+      return res.send('Something went wrong');
+    }
+
+    const timestamp = Date.now() - startTime;
+
+    res.send({
+      greeting: finalGreeting,
+      data: users
+    });
+  });
+});
+
 
 app.get('/users', (req, res) => {
   const startTime = Date.now();

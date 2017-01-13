@@ -1,0 +1,24 @@
+searchString1="SUCCESS"
+searchString2="SUCCESS"
+success="no"
+yes="yes"
+no="no"
+while read line
+do
+        name=$line
+        if [[ $name == *"$searchString1"* ]] ||
+         [[ $name == *"$searchString2"* ]]
+        then
+                success="yes";
+        fi
+done < unit-test-output.txt
+
+if [[ $success == *"$yes"* ]]
+then
+	docker push localhost:5000/devopsly200-microservice1:working 
+fi
+
+if [[ $success == *"$no"* ]]
+then
+        docker push localhost:5000/devopsly200-microservice1:working
+fi
