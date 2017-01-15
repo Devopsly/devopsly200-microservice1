@@ -20,7 +20,7 @@ var mongoPort = process.env.DATABASE_PORT;
 var starterServicePort = process.env.STARTER_SERVICE_PORT;
 // var starterServicePort = 8000;
 
-
+// Have to move this to local variable and call service 2 each time on greetuser
 var finalGreeting = "Whatever";
 
 
