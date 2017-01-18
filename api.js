@@ -42,6 +42,7 @@ var callback = function(response) {
   response.on('end', function () {
     console.log("Internet address is " + str);
     thisAddress = str;
+
     mongoDbUrl = thisAddress + ":" + mongoPort;
     mongoose.connect(`mongodb://${mongoDbUrl}/userdb`);
     User = mongoose.model('User', { name: String });
