@@ -114,7 +114,7 @@ app.get('/greetuser', (reqGreet, resGreet) => {
                 finalGreeting = greeting2;
                 console.log(finalGreeting);
 		
-		resGreet.writeHead(200, {"Content-Type": "json"});
+		// resGreet.writeHead(200, {"Content-Type": "json"});
 
     		resGreet.send({
       		  greeting: finalGreeting,
