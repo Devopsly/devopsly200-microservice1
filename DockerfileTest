@@ -9,4 +9,4 @@ ENV DATABASE_PORT=31500
 ENV STARTER_SERVICE_PORT=31300
 
 CMD []
-ENTRYPOINT ["/nodejs/bin/npm", "start", "> out.txt"]
+ENTRYPOINT ["/nodejs/bin/npm", "start"]
