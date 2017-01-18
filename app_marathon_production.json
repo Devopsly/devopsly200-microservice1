@@ -5,7 +5,7 @@
         "image": "localhost:5000/devopsly200-microservice1-productionstage",
         "network": "BRIDGE",
         "portMappings": [
-          {"containerPort": 8000, "hostPort": 31450, "servicePort": 8000}
+          {"containerPort": 3000, "hostPort": 31450, "servicePort": 3000}
         ]
       }
     },

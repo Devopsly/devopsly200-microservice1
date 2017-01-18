@@ -20,7 +20,7 @@ if [ "$success" = "$no" ];
 then
 # rollback
 	echo rolling-back
-#sh deploy-production-lastsuccess.sh
+	sh deploy-production-lastsuccess.sh
 	sh deploy-production-failed.sh
 	exit 1
 fi
