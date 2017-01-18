@@ -2,10 +2,10 @@
     "id": "microservice1-production-failed", 
     "container": {
       "docker": {
-        "image": "localhost:5000/devopsly200-microservice1-productionstage-failed",
+        "image": "localhost:5000/devopsly200-microservice1-productionstage",
         "network": "BRIDGE",
         "portMappings": [
-          {"containerPort": 3000, "hostPort": 31451, "servicePort": 3000}
+          {"containerPort": 8000, "hostPort": 31451, "servicePort": 8000}
         ]
       }
     },

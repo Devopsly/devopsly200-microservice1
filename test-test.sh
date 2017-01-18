@@ -9,24 +9,27 @@ no="no"
 while read line
 do
         name=$line
-        if [[ $name == *"$searchString1"* ]] ||
-         [[ $name == *"$searchString2"* ]]
+        if [ "$name" = "$searchString1" ] ;  
         then
-                success="yes";
+		echo succeeded
+                success="yes"
         fi
-done < unit-test-output.txt
+done < run-tests-on-test.txt 
 
-if [[ $success == *"$no"* ]]
+if [ "$success" = "$no" ];
 then
 # rollback
-        docker rmi -f localhost:5000/devopsly200-microservice1-teststage:$buildNumber
-	sh deploy-test.sh
+	echo rolling-back
+	sh deploy-test-lastsuccess.sh
+	sh deploy-test-failed.sh
 	exit 1
 fi
-if [[ $success == *"$yes"* ]]
+
+if [ "$success" = "$yes" ];
 then
-# rollback
-        docker rmi -f localhost:5000/devopsly200-microservice1-teststage-failed:$buildNumber
-	sh deploy-test-failed.sh
+	docker rmi -f localhost:5000/devopsly200-microservice1-teststage-lastsuccess
+	docker build -t localhost:5000/devopsly200-microservice1-teststage-lastsuccess -f DockerfileTest .
+	docker push localhost:5000/devopsly200-microservice1-teststage-lastsuccess
+	echo Tests-succeeded-updated-lastsuccess-image 
 fi
 
