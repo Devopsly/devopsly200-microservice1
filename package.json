@@ -8,7 +8,10 @@
     "express": "^4.14.0",
     "ip": "^1.1.4",
     "mongoose": "^4.7.6",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "random-name": "^0.1.2"
   },
-  "scripts": {"start": "node api.js"}
+  "scripts": {
+    "start": "node api.js"
+  }
 }

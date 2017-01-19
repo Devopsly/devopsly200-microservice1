@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var random = require('random-name');
 
 var ip = require("ip");
 var thisAddress = ip.address();
@@ -188,7 +189,8 @@ app.post('/users', (req, res) => {
 
 app.get('/createoneuser', (req, res) => {
   const startTime = Date.now();
-  const name = "Joe Johnson";
+  // const name = "Joe Johnson";
+  var name = random.first() + " " + random.last();
 
   const user = new User({ name });
   user.save((err) => {

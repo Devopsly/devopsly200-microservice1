@@ -30,7 +30,7 @@ var options = {
   path: '/'
 };
 
-callback = function(response) {
+var callback = function(response) {
   var str = '';
 
   //another chunk of data has been recieved, so append it to `str`
@@ -42,18 +42,17 @@ callback = function(response) {
   response.on('end', function () {
     console.log("Internet address is " + str);
     thisAddress = str;
+
     mongoDbUrl = thisAddress + ":" + mongoPort;
     mongoose.connect(`mongodb://${mongoDbUrl}/userdb`);
     User = mongoose.model('User', { name: String });
 
-    ///////////////////
-
-var options1= {
+    var options1= {
         host: thisAddress, //'localhost' 
         path: '/',
         port: starterServicePort
     };
-callback1 = function(response1) {
+    var callback1 = function(response1) {
 
        var greeting = '';
 
@@ -69,27 +68,70 @@ callback1 = function(response1) {
         });
 
     };
-
-http.request(options1, callback1).end();
-
-
-    ///////////////////
-
-
+    http.request(options1, callback1).end();
   });
-
 };
-
-
-
-
 http.request(options, callback).end();
+
+
+
+
 
 var app = express();
 
 app.use(bodyParser.json());
 
-app.get('/greetuser', (req, res) => {
+
+
+
+app.get('/greetuser', (reqGreet, resGreet) => {
+  const startTime = Date.now();
+
+
+  User.find((err, users) => {
+    if (err)  {
+      return resGreet.send('Something went wrong');
+    }
+
+    const timestamp = Date.now() - startTime;
+
+    var options2= {
+        host: thisAddress, //'localhost' 
+        path: '/',
+        port: starterServicePort
+    };
+    var callback2 = function(response2) {
+
+       var greeting2 = '';
+
+        //another chunk of data has been recieved, so append it to `str`
+        response2.on('data', function (chunk2) {
+                greeting2 += chunk2;
+        });
+
+        //the whole response has been recieved, so we just print it out here
+        response2.on('end', function () {
+                finalGreeting = greeting2;
+                console.log(finalGreeting);
+		
+		// resGreet.writeHead(200, {"Content-Type": "json"});
+
+    		resGreet.send({
+      		  greeting: finalGreeting,
+      		  data: users
+    		});
+        });
+
+    };
+    http.request(options2, callback2).end();
+  });
+});
+
+
+
+
+
+app.get('/greetuser1', (req, res) => {
   const startTime = Date.now();
 
 
